@@ -1,0 +1,520 @@
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]:
+Password for user postgres:
+
+psql (18.7)
+WARNING: Console code page (437) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+postgres=# \l
+                                                                    List of databases
+   Name    |  Owner   | Encoding | Locale Provider |          Collate           |           Ctype            | Locale | ICU Rules |   Access privileges
+-----------+----------+----------+-----------------+----------------------------+----------------------------+--------+-----------+-----------------------
+ college   | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           |
+ postgres  | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           |
+ student   | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           |
+ template0 | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           | =c/postgres          +
+           |          |          |                 |                            |                            |        |           | postgres=CTc/postgres
+ template1 | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           | =c/postgres          +
+           |          |          |                 |                            |                            |        |           | postgres=CTc/postgres
+(5 rows)
+
+
+postgres=# \dt
+           List of tables
+ Schema |  Name   | Type  |  Owner
+--------+---------+-------+----------
+ public | stu1    | table | postgres
+ public | student | table | postgres
+(2 rows)
+
+
+postgres=# \c college
+You are now connected to database "college" as user "postgres".
+college=# \dt
+           List of tables
+ Schema |  Name   | Type  |  Owner
+--------+---------+-------+----------
+ public | student | table | postgres
+(1 row)
+
+
+college=# INSERT INTO student (name, age, course, marks)
+college-# VALUES
+college-# ('rahul', 21, 'BCA', 85),
+college-# ('amar', 20, 'BBB', 87),
+college-# ('kiran', 22, 'MCA', 97),
+college-# ('augustin', 22, 'BE', 97),
+college-# ('punith', 19, 'MMA', 97),
+college-# ('shesha', 19, 'MMA', 97),
+college-# ('varshith', 23, 'MBA', 97),
+college-# ('manoja', 26, 'MBA', 93),
+college-# ('shashank', 22, 'BBA', 93),
+college-# ('karan', 20, 'BCA', 88);
+INSERT 0 10
+college=# SELECT * FROM student;
+ id |   name   | age | course | marks
+----+----------+-----+--------+-------
+  1 | rahul    |  21 | BCA    |    85
+  2 | amar     |  20 | BBB    |    87
+  3 | kiran    |  22 | MCA    |    97
+  4 | augustin |  22 | BE     |    97
+  5 | punith   |  19 | MMA    |    97
+  6 | shesha   |  19 | MMA    |    97
+  7 | varshith |  23 | MBA    |    97
+  8 | manoja   |  26 | MBA    |    93
+  9 | shashank |  22 | BBA    |    93
+ 10 | karan    |  20 | BCA    |    88
+(10 rows)
+
+
+college=# select * from student
+college-# where marks > 80;
+ id |   name   | age | course | marks
+----+----------+-----+--------+-------
+  1 | rahul    |  21 | BCA    |    85
+  2 | amar     |  20 | BBB    |    87
+  3 | kiran    |  22 | MCA    |    97
+  4 | augustin |  22 | BE     |    97
+  5 | punith   |  19 | MMA    |    97
+  6 | shesha   |  19 | MMA    |    97
+  7 | varshith |  23 | MBA    |    97
+  8 | manoja   |  26 | MBA    |    93
+  9 | shashank |  22 | BBA    |    93
+ 10 | karan    |  20 | BCA    |    88
+(10 rows)
+
+
+college=# select * from student
+college-# where marks > 95;
+ id |   name   | age | course | marks
+----+----------+-----+--------+-------
+  3 | kiran    |  22 | MCA    |    97
+  4 | augustin |  22 | BE     |    97
+  5 | punith   |  19 | MMA    |    97
+  6 | shesha   |  19 | MMA    |    97
+  7 | varshith |  23 | MBA    |    97
+(5 rows)
+
+
+college=# select * from student
+college-# order by marks desc;
+ id |   name   | age | course | marks
+----+----------+-----+--------+-------
+  4 | augustin |  22 | BE     |    97
+  6 | shesha   |  19 | MMA    |    97
+  7 | varshith |  23 | MBA    |    97
+  3 | kiran    |  22 | MCA    |    97
+  5 | punith   |  19 | MMA    |    97
+  9 | shashank |  22 | BBA    |    93
+  8 | manoja   |  26 | MBA    |    93
+ 10 | karan    |  20 | BCA    |    88
+  2 | amar     |  20 | BBB    |    87
+  1 | rahul    |  21 | BCA    |    85
+(10 rows)
+
+
+college=# select * from student
+college-# order by marks asc;
+ id |   name   | age | course | marks
+----+----------+-----+--------+-------
+  1 | rahul    |  21 | BCA    |    85
+  2 | amar     |  20 | BBB    |    87
+ 10 | karan    |  20 | BCA    |    88
+  9 | shashank |  22 | BBA    |    93
+  8 | manoja   |  26 | MBA    |    93
+  6 | shesha   |  19 | MMA    |    97
+  4 | augustin |  22 | BE     |    97
+  3 | kiran    |  22 | MCA    |    97
+  7 | varshith |  23 | MBA    |    97
+  5 | punith   |  19 | MMA    |    97
+(10 rows)
+
+
+college=# update student
+college-# set marks =55
+college-# where id =10
+college-# ;
+UPDATE 1
+college=# select * from student;
+ id |   name   | age | course | marks
+----+----------+-----+--------+-------
+  1 | rahul    |  21 | BCA    |    85
+  2 | amar     |  20 | BBB    |    87
+  3 | kiran    |  22 | MCA    |    97
+  4 | augustin |  22 | BE     |    97
+  5 | punith   |  19 | MMA    |    97
+  6 | shesha   |  19 | MMA    |    97
+  7 | varshith |  23 | MBA    |    97
+  8 | manoja   |  26 | MBA    |    93
+  9 | shashank |  22 | BBA    |    93
+ 10 | karan    |  20 | BCA    |    55
+(10 rows)
+
+
+college=# update student
+college-# set marks =73
+college-# where id =22;
+UPDATE 0
+college=# update student
+college-# set marks =83
+college-# where id =7;
+UPDATE 1
+college=# select * from student;
+ id |   name   | age | course | marks
+----+----------+-----+--------+-------
+  1 | rahul    |  21 | BCA    |    85
+  2 | amar     |  20 | BBB    |    87
+  3 | kiran    |  22 | MCA    |    97
+  4 | augustin |  22 | BE     |    97
+  5 | punith   |  19 | MMA    |    97
+  6 | shesha   |  19 | MMA    |    97
+  8 | manoja   |  26 | MBA    |    93
+  9 | shashank |  22 | BBA    |    93
+ 10 | karan    |  20 | BCA    |    55
+  7 | varshith |  23 | MBA    |    83
+(10 rows)
+
+
+college=# update student
+college-# set marks = 80
+college-# where id in (1, 3, 5);
+UPDATE 3
+college=# update student
+college-# set marks = case
+college-# when id = 1 then 92
+college-# when id = 2 then 85
+college-# when id = 3 then 95
+college-# end
+college-# where id in (1, 2, 3);
+UPDATE 3
+college=#
+college=# select * from student;
+ id |   name   | age | course | marks
+----+----------+-----+--------+-------
+  4 | augustin |  22 | BE     |    97
+  6 | shesha   |  19 | MMA    |    97
+  8 | manoja   |  26 | MBA    |    93
+  9 | shashank |  22 | BBA    |    93
+ 10 | karan    |  20 | BCA    |    55
+  7 | varshith |  23 | MBA    |    83
+  5 | punith   |  19 | MMA    |    80
+  1 | rahul    |  21 | BCA    |    92
+  2 | amar     |  20 | BBB    |    85
+  3 | kiran    |  22 | MCA    |    95
+(10 rows)
+
+
+college=# update  student
+college-# set marks = marks + 1;
+UPDATE 10
+college=# select * from student;
+ id |   name   | age | course | marks
+----+----------+-----+--------+-------
+  4 | augustin |  22 | BE     |    98
+  6 | shesha   |  19 | MMA    |    98
+  8 | manoja   |  26 | MBA    |    94
+  9 | shashank |  22 | BBA    |    94
+ 10 | karan    |  20 | BCA    |    56
+  7 | varshith |  23 | MBA    |    84
+  5 | punith   |  19 | MMA    |    81
+  1 | rahul    |  21 | BCA    |    93
+  2 | amar     |  20 | BBB    |    86
+  3 | kiran    |  22 | MCA    |    96
+(10 rows)
+
+
+college=# delete from student where id = 4;
+DELETE 1
+college=# select * from student;
+ id |   name   | age | course | marks
+----+----------+-----+--------+-------
+  6 | shesha   |  19 | MMA    |    98
+  8 | manoja   |  26 | MBA    |    94
+  9 | shashank |  22 | BBA    |    94
+ 10 | karan    |  20 | BCA    |    56
+  7 | varshith |  23 | MBA    |    84
+  5 | punith   |  19 | MMA    |    81
+  1 | rahul    |  21 | BCA    |    93
+  2 | amar     |  20 | BBB    |    86
+  3 | kiran    |  22 | MCA    |    96
+(9 rows)
+
+
+college=# select * from student
+college-# limit 2;
+ id |  name  | age | course | marks
+----+--------+-----+--------+-------
+  6 | shesha |  19 | MMA    |    98
+  8 | manoja |  26 | MBA    |    94
+(2 rows)
+
+
+college=# select * from student
+college-# limit 5;
+ id |   name   | age | course | marks
+----+----------+-----+--------+-------
+  6 | shesha   |  19 | MMA    |    98
+  8 | manoja   |  26 | MBA    |    94
+  9 | shashank |  22 | BBA    |    94
+ 10 | karan    |  20 | BCA    |    56
+  7 | varshith |  23 | MBA    |    84
+(5 rows)
+
+
+college=# select * from student
+college-# order by marks desc
+college-# limit 2;
+ id |  name  | age | course | marks
+----+--------+-----+--------+-------
+  6 | shesha |  19 | MMA    |    98
+  3 | kiran  |  22 | MCA    |    96
+(2 rows)
+
+
+college=# select count(*)
+college-# from student;
+ count
+-------
+     9
+(1 row)
+
+
+college=# SELECT *
+college-# FROM student
+college-# WHERE course = 'MBA';
+ id |   name   | age | course | marks
+----+----------+-----+--------+-------
+  8 | manoja   |  26 | MBA    |    94
+  7 | varshith |  23 | MBA    |    84
+(2 rows)
+
+
+college=# SELECT course, COUNT(*) AS student_count
+college-# FROM student
+college-# WHERE course = 'MBA'
+college-# GROUP BY course;
+ course | student_count
+--------+---------------
+ MBA    |             2
+(1 row)
+
+
+college=# UPDATE student
+college-# SET course = CASE
+college-#     WHEN id = 1 THEN 'AIML'
+college-#     WHEN id = 2 THEN 'AIML'
+college-#     WHEN id = 3 THEN 'AIML'
+college-#     WHEN id = 4 THEN 'AIML'
+college-# END
+college-# WHERE id IN (1, 2, 3, 4);
+UPDATE 3
+college=# SELECT course, COUNT(*) AS student_count
+college-# FROM student
+college-# WHERE course = 'MBA'
+college-# GROUP BY course;
+ course | student_count
+--------+---------------
+ MBA    |             2
+(1 row)
+
+
+college=# SELECT course, COUNT(*) AS student_count
+college-# FROM student
+college-# WHERE course = 'AIML'
+college-# GROUP BY course;
+ course | student_count
+--------+---------------
+ AIML   |             3
+(1 row)
+
+
+college=# select * from student;
+ id |   name   | age | course | marks
+----+----------+-----+--------+-------
+  6 | shesha   |  19 | MMA    |    98
+  8 | manoja   |  26 | MBA    |    94
+  9 | shashank |  22 | BBA    |    94
+ 10 | karan    |  20 | BCA    |    56
+  7 | varshith |  23 | MBA    |    84
+  5 | punith   |  19 | MMA    |    81
+  1 | rahul    |  21 | AIML   |    93
+  2 | amar     |  20 | AIML   |    86
+  3 | kiran    |  22 | AIML   |    96
+(9 rows)
+
+
+college=# select course, max(marks)
+college-# from student
+college-# group by course;
+ course | max
+--------+-----
+ BBA    |  94
+ BCA    |  56
+ AIML   |  96
+ MBA    |  94
+ MMA    |  98
+(5 rows)
+
+
+college=# create table student_card(
+college(# card_id serial primary key,
+college(# card_number varchar(50),
+college(# id int unique references student(id));
+CREATE TABLE
+college=# insert into student_card(card_number, id)
+college-# values
+college-# ('card101', 1),
+college-# ('card102', 2);
+INSERT 0 2
+college=#
+college=#
+college=#
+college=# select 8 from student_card;
+ ?column?
+----------
+        8
+        8
+(2 rows)
+
+
+college=# CREATE TABLE department (
+college(#     department_id SERIAL PRIMARY KEY,
+college(#     department_name VARCHAR(100)
+college(# );
+CREATE TABLE
+college=# CREATE TABLE new (
+college(#     employee_id SERIAL PRIMARY KEY,
+college(#     employee_name VARCHAR(100),
+college(#     salary INT,
+college(#     department_id INT REFERENCES department(department_id)
+college(# );
+CREATE TABLE
+college=# SELECT * FROM new;
+ employee_id | employee_name | salary | department_id
+-------------+---------------+--------+---------------
+(0 rows)
+
+
+college=# SELECT * FROM department;
+ department_id | department_name
+---------------+-----------------
+(0 rows)
+
+
+college=# INSERT INTO department (department_name)
+college-# VALUES
+college-# ('HR'),
+college-# ('IT'),
+college-# ('Finance'),
+college-# ('Sales'),
+college-# ('Marketing');
+INSERT 0 5
+college=# INSERT INTO new (employee_name, salary, department_id)
+college-# VALUES
+college-# ('Rahul', 24000, 1),
+college-# ('Priya', 30000, 2),
+college-# ('Amit', 35000, 3),
+college-# ('Sneha', 28000, 4),
+college-# ('Arun', 40000, 5),
+college-# ('Kiran', 32000, 1),
+college-# ('Divya', 45000, 2),
+college-# ('Ravi', 26000, 3);
+INSERT 0 8
+college=# SELECT * FROM new;
+ employee_id | employee_name | salary | department_id
+-------------+---------------+--------+---------------
+           9 | Rahul         |  24000 |             1
+          10 | Priya         |  30000 |             2
+          11 | Amit          |  35000 |             3
+          12 | Sneha         |  28000 |             4
+          13 | Arun          |  40000 |             5
+          14 | Kiran         |  32000 |             1
+          15 | Divya         |  45000 |             2
+          16 | Ravi          |  26000 |             3
+(8 rows)
+
+
+college=# ALTER TABLE new RENAME TO employee;
+ALTER TABLE
+college=# SELECT * FROM employee;
+ employee_id | employee_name | salary | department_id
+-------------+---------------+--------+---------------
+           9 | Rahul         |  24000 |             1
+          10 | Priya         |  30000 |             2
+          11 | Amit          |  35000 |             3
+          12 | Sneha         |  28000 |             4
+          13 | Arun          |  40000 |             5
+          14 | Kiran         |  32000 |             1
+          15 | Divya         |  45000 |             2
+          16 | Ravi          |  26000 |             3
+(8 rows)
+
+
+college=# UPDATE employee
+college-# SET employee_name = CASE employee_id
+college-#     WHEN 1 THEN 'Naruto'
+college-#     WHEN 2 THEN 'Sasuke'
+college-#     WHEN 3 THEN 'Itachi'
+college-#     WHEN 4 THEN 'Kakashi'
+college-#     WHEN 5 THEN 'Luffy'
+college-#     WHEN 6 THEN 'Zoro'
+college-#     WHEN 7 THEN 'Ichigo'
+college-#     WHEN 8 THEN 'Levi'
+college-# END
+college-# WHERE employee_id BETWEEN 1 AND 8;
+UPDATE 0
+college=# SELECT * FROM employee;
+ employee_id | employee_name | salary | department_id
+-------------+---------------+--------+---------------
+           9 | Rahul         |  24000 |             1
+          10 | Priya         |  30000 |             2
+          11 | Amit          |  35000 |             3
+          12 | Sneha         |  28000 |             4
+          13 | Arun          |  40000 |             5
+          14 | Kiran         |  32000 |             1
+          15 | Divya         |  45000 |             2
+          16 | Ravi          |  26000 |             3
+(8 rows)
+
+
+college=# UPDATE employee
+college-# SET employee_name = CASE employee_id
+college-#     WHEN 9 THEN 'Naruto'
+college-#     WHEN 10 THEN 'Sasuke'
+college-#     WHEN 11 THEN 'Itachi'
+college-#     WHEN 12 THEN 'Kakashi'
+college-#     WHEN 13 THEN 'Luffy'
+college-#     WHEN 14 THEN 'Zoro'
+college-#     WHEN 15 THEN 'Ichigo'
+college-#     WHEN 16 THEN 'Levi'
+college-# END
+college-# WHERE employee_id BETWEEN 9 AND 16;
+UPDATE 8
+college=# SELECT * FROM employee;
+ employee_id | employee_name | salary | department_id
+-------------+---------------+--------+---------------
+           9 | Naruto        |  24000 |             1
+          10 | Sasuke        |  30000 |             2
+          11 | Itachi        |  35000 |             3
+          12 | Kakashi       |  28000 |             4
+          13 | Luffy         |  40000 |             5
+          14 | Zoro          |  32000 |             1
+          15 | Ichigo        |  45000 |             2
+          16 | Levi          |  26000 |             3
+(8 rows)
+
+
+college=#
+college=#
+college=#
+college=#
+college=#
+college=#
+college=#
+college=#
+college=#
