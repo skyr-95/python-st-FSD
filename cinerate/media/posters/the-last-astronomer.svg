@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" role="img" aria-labelledby="title">
+  <title id="title">The Last Astronomer</title>
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1">
+      <stop stop-color="#101536"/>
+      <stop offset="1" stop-color="#48265f"/>
+    </linearGradient>
+    <linearGradient id="glow" x2="0" y2="1">
+      <stop stop-color="#ffe89a"/>
+      <stop offset="1" stop-color="#ef8c63"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#sky)" d="M0 0h400v600H0z"/>
+  <circle cx="200" cy="214" r="95" fill="none" stroke="#fdc978" stroke-opacity=".22" stroke-width="2"/>
+  <circle cx="200" cy="214" r="70" fill="none" stroke="#fdc978" stroke-opacity=".38"/>
+  <path fill="#f7c778" d="M200 86a54 54 0 1 0 54 54 47 47 0 0 1-54-54Z"/>
+  <g fill="#fff3cd">
+    <circle cx="73" cy="102" r="3"/><circle cx="316" cy="89" r="2"/><circle cx="330" cy="235" r="3"/>
+    <circle cx="93" cy="282" r="2"/><circle cx="278" cy="314" r="2"/><circle cx="147" cy="71" r="2"/>
+  </g>
+  <path fill="#181b38" d="M0 433q76-52 150-4 55-55 119-4 59-46 131-2v177H0Z"/>
+  <path fill="#292744" d="M90 445a110 110 0 0 1 220 0Z"/>
+  <path fill="#101326" d="M172 441a28 28 0 0 1 56 0v42h-56Z"/>
+  <path fill="url(#glow)" d="M190 445h20v38h-20z"/>
+  <text x="200" y="520" fill="#fff3dc" font-family="Georgia,serif" font-size="27" text-anchor="middle" letter-spacing="3">THE LAST</text>
+  <text x="200" y="556" fill="#ffd27b" font-family="Georgia,serif" font-size="31" text-anchor="middle" letter-spacing="2">ASTRONOMER</text>
+</svg>

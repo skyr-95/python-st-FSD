@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" role="img" aria-labelledby="title">
+  <title id="title">Letters from Tomorrow</title>
+  <defs>
+    <linearGradient id="sea" x2="0" y2="1">
+      <stop stop-color="#183c50"/>
+      <stop offset="1" stop-color="#101d32"/>
+    </linearGradient>
+    <linearGradient id="beam" x2="1" y2="1">
+      <stop stop-color="#ffe5a0" stop-opacity=".8"/>
+      <stop offset="1" stop-color="#ffe5a0" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <path fill="url(#sea)" d="M0 0h400v600H0z"/>
+  <circle cx="292" cy="139" r="57" fill="#ffd28a" opacity=".92"/>
+  <path d="m222 208 145-78-119 126Z" fill="url(#beam)"/>
+  <path fill="#172333" d="M0 343q74-35 142 6t130 0q68-36 128 2v249H0Z"/>
+  <path fill="#21374a" d="M0 414q76-31 147 1t131 0q64-26 122 2v183H0Z"/>
+  <path fill="#df755d" d="M177 196h50l-9 24h-32Z"/>
+  <path fill="#f5eee0" d="M184 220h36l-12 104h-12Z"/>
+  <path fill="#e78467" d="M187 260h30l-5 12h-20Z"/>
+  <path fill="#f5eee0" d="M171 324h61v10h-61z"/>
+  <path fill="#ffd985" d="M197 226h10v22h-10z"/>
+  <path fill="none" stroke="#ffd99b" stroke-opacity=".45" stroke-width="3" d="M28 468q44-14 88 0t88 0m-167 37q38-13 76 0t76 0m84-35q44-13 88 0"/>
+  <text x="200" y="526" fill="#fff1d2" font-family="Georgia,serif" font-size="29" text-anchor="middle" letter-spacing="3">LETTERS FROM</text>
+  <text x="200" y="563" fill="#ffd28a" font-family="Georgia,serif" font-size="36" text-anchor="middle" letter-spacing="4">TOMORROW</text>
+</svg>
